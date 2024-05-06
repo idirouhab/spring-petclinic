@@ -441,5 +441,10 @@
       <name>a0p5vtrp0rmwp-artifactory-primary-0-releases</name>
       <url>https://idirotest.jfrog.io/artifactory/spring-petclinic-libs-release</url>
     </repository>
+    <snapshotRepository>
+      <id>snapshots</id>
+      <name>a0p5vtrp0rmwp-artifactory-primary-0-snapshots</name>
+      <url>https://idirotest.jfrog.io/artifactory/spring-petclinic-libs-snapshot</url>
+    </snapshotRepository>
   </distributionManagement>
 </project>
