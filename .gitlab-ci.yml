@@ -1,21 +1,24 @@
 image: maven:3.8.5-openjdk-17
 
 variables:
-  ARTIFACTORY_URL: https://idirotest.jfrog.io
+  ARTIFACTORY_URL: https://idirotest.jfrog.io/artifactory
   ARTIFACTORY_REPO: spring-petclinic-libs-release
-  ARTIFACTORY_USER: $ARTIFACTORY_USER
-  ARTIFACTORY_PASSWORD: $ARTIFACTORY_PASSWORD
 
 stages:
+  - publish
   - compile
   - test
   - package
-  - publish
+
+
+publish:
+  stage: publish
+  script:
+    - mvn deploy -DskipTests -Drepo.user=$ARTIFACTORY_USER -Drepo.password=$ARTIFACTORY_PASSWORD
 
 compile:
   stage: compile
   script:
-    - printenv
     - mvn compile
 
 test:
@@ -27,8 +30,3 @@ package:
   stage: package
   script:
     - mvn package
-
-publish:
-  stage: publish
-  script:
-    - mvn deploy -DskipTests
