@@ -3,8 +3,6 @@ image: maven:3.8.5-openjdk-17
 variables:
   ARTIFACTORY_URL: https://idirotest.jfrog.io
   ARTIFACTORY_REPO: spring-petclinic-libs-release
-  ARTIFACTORY_USER: $CI_REGISTRY_USER
-  ARTIFACTORY_PASSWORD: $CI_REGISTRY_PASSWORD
 
 stages:
   - compile
