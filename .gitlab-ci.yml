@@ -1,17 +1,10 @@
-image: maven:3.6.3-jdk-11
+image: maven:3.6.3-jdk-17
 
 variables:
-  DOCKER_DRIVER: overlay2
-  DOCKER_TLS_CERTDIR: "/certs"
-  DOCKER_HOST: tcp://docker:2375/
-  DOCKER_IMAGE: my-docker-image
-  ARTIFACTORY_URL: https://my-artifactory-instance.com
-  ARTIFACTORY_REPO: my-repo
+  ARTIFACTORY_URL: https://idirotest.jfrog.io
+  ARTIFACTORY_REPO: spring-petclinic-libs-release-local
   ARTIFACTORY_USER: $CI_REGISTRY_USER
   ARTIFACTORY_PASSWORD: $CI_REGISTRY_PASSWORD
-
-services:
-  - docker:dind
 
 stages:
   - compile
@@ -33,11 +26,8 @@ package:
   stage: package
   script:
     - mvn package
-    - docker build -t $DOCKER_IMAGE .
 
 publish:
   stage: publish
   script:
-    - docker login -u $ARTIFACTORY_USER -p $ARTIFACTORY_PASSWORD $ARTIFACTORY_URL
-    - docker tag $DOCKER_IMAGE $ARTIFACTORY_URL/$ARTIFACTORY_REPO/$DOCKER_IMAGE:latest
-    - docker push $ARTIFACTORY_URL/$ARTIFACTORY_REPO/$DOCKER_IMAGE:latest
+    - mvn deploy -DskipTests
