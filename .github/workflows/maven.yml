@@ -9,7 +9,9 @@ on:
       - main
 env:
   MAVEN_SETTINGS_PATH: ".m2/settings.xml"
-  ARTIFACTORY_URL: https://idirotest.jfrog.io
+  ARTIFACTORY_USER: ${{ vars.ARTIFACTORY_USER }}
+  ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+
 
 jobs:
   publish:
