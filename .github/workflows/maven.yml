@@ -22,7 +22,7 @@ jobs:
           cache: maven
           distribution: 'adopt'
       - name: Check environment variables
-        run: printenv
+        run: printenv | grep ARTIFACTORY
       - name: Publish to Artifactory
         run: ./mvnw deploy -DskipTests -s ${{ env.MAVEN_SETTINGS_PATH }}
 
