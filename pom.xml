@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.springframework.samples</groupId>
   <artifactId>spring-petclinic</artifactId>
@@ -155,7 +155,8 @@
             <configuration>
               <rules>
                 <requireJavaVersion>
-                  <message>This build requires at least Java ${java.version}, update your JVM, and run the build again</message>
+                  <message>This build requires at least Java ${java.version}, update your JVM, and run the build again
+                  </message>
                   <version>${java.version}</version>
                 </requireJavaVersion>
               </rules>
@@ -271,7 +272,6 @@
   </build>
 
 
-
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -364,7 +364,8 @@
               <inputPath>${basedir}/src/main/scss/</inputPath>
               <outputPath>${basedir}/src/main/resources/static/resources/css/</outputPath>
               <includePath>
-                ${project.build.directory}/webjars/META-INF/resources/webjars/bootstrap/${webjars-bootstrap.version}/scss/</includePath>
+                ${project.build.directory}/webjars/META-INF/resources/webjars/bootstrap/${webjars-bootstrap.version}/scss/
+              </includePath>
             </configuration>
           </plugin>
         </plugins>
@@ -399,7 +400,7 @@
                         </goals>
                       </pluginExecutionFilter>
                       <action>
-                        <ignore />
+                        <ignore/>
                       </action>
                     </pluginExecution>
                     <pluginExecution>
@@ -412,7 +413,7 @@
                         </goals>
                       </pluginExecutionFilter>
                       <action>
-                        <ignore />
+                        <ignore/>
                       </action>
                     </pluginExecution>
                     <pluginExecution>
@@ -425,7 +426,7 @@
                         </goals>
                       </pluginExecutionFilter>
                       <action>
-                        <ignore />
+                        <ignore/>
                       </action>
                     </pluginExecution>
                   </pluginExecutions>
@@ -441,7 +442,12 @@
     <repository>
       <id>central</id>
       <name>a0p5vtrp0rmwp-artifactory-primary-0-releases</name>
-      <url>https://idirotest.jfrog.io/artifactory/spring-petclinic</url>
+      <url>https://idirotest.jfrog.io/artifactory/spring-petsclinic-libs-release</url>
     </repository>
+    <snapshotRepository>
+      <id>snapshots</id>
+      <name>a0p5vtrp0rmwp-artifactory-primary-0-snapshots</name>
+      <url>https://idirotest.jfrog.io/artifactory/spring-petsclinic-libs-snapshot-local</url>
+    </snapshotRepository>
   </distributionManagement>
 </project>
