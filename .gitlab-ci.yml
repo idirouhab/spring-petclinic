@@ -1,6 +1,8 @@
 image: maven:3.8.5-openjdk-17
 
 variables:
+  ARTIFACTORY_URL: https://idirotest.jfrog.io
+  ARTIFACTORY_REPO: spring-petclinic-libs-release
   MAVEN_SETTINGS_PATH: ".m2/settings.xml"
 
 stages:
@@ -13,7 +15,6 @@ stages:
 publish:
   stage: publish
   script:
-    - printenv
     - mvn deploy -DskipTests
 
 compile:
