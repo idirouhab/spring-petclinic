@@ -9,6 +9,7 @@ on:
       - main
 env:
   MAVEN_SETTINGS_PATH: ".m2/settings.xml"
+  ARTIFACTORY_URL: https://idirotest.jfrog.io
 
 jobs:
   publish:
