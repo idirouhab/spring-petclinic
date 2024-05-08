@@ -6,16 +6,10 @@ variables:
   MAVEN_SETTINGS_PATH: ".m2/settings.xml"
 
 stages:
-  - publish
   - compile
   - test
   - package
-
-
-publish:
-  stage: publish
-  script:
-    - ./mvnw deploy -DskipTests -s $MAVEN_SETTINGS_PATH
+  - publish
 
 compile:
   stage: compile
@@ -32,4 +26,7 @@ package:
   script:
     - ./mvnw package
 
-
+publish:
+  stage: publish
+  script:
+    - ./mvnw deploy -DskipTests -s $MAVEN_SETTINGS_PATH

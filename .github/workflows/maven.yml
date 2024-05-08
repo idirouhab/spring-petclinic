@@ -14,8 +14,46 @@ env:
 
 
 jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          cache: maven
+          distribution: 'adopt'
+      - name: Compile
+        run: ./mvnw compile
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          cache: maven
+          distribution: 'adopt'
+      - name: Test
+        run: ./mvnw test
+
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          cache: maven
+          distribution: 'adopt'
+      - name: Package
+        run: ./mvnw package
+
   publish:
-    environment: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -29,5 +67,3 @@ jobs:
         run: printenv | grep ARTIFACTORY
       - name: Publish to Artifactory
         run: ./mvnw deploy -DskipTests -s ${{ env.MAVEN_SETTINGS_PATH }}
-
-
