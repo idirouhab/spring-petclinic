@@ -15,7 +15,7 @@ stages:
 publish:
   stage: publish
   script:
-    - ./mvnw deploy -DskipTests -s ./.m2/settings.xml
+    - ./mvnw deploy -DskipTests -s $MAVEN_SETTINGS_PATH
 
 compile:
   stage: compile

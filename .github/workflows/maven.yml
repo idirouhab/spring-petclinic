@@ -9,9 +9,8 @@ on:
       - main
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 17
@@ -20,6 +19,7 @@ jobs:
           java-version: '17'
           cache: maven
           distribution: 'adopt'
-      - name: Build with Maven
-        run: ./mvnw compile
+      - name: Publish to Artifactory
+        run: ./mvnw deploy -DskipTests -s ${{ env.MAVEN_SETTINGS_PATH }}
+
 
