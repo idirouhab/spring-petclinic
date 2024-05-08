@@ -15,21 +15,21 @@ stages:
 publish:
   stage: publish
   script:
-    - mvn deploy -DskipTests
+    - ./mvnw deploy -DskipTests -s ./.m2/settings.xml
 
 compile:
   stage: compile
   script:
-    - mvn compile
+    - ./mvnw compile
 
 test:
   stage: test
   script:
-    - mvn test
+    - ./mvnw test
 
 package:
   stage: package
   script:
-    - mvn package
+    - ./mvnw package
 
 
