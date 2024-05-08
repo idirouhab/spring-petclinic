@@ -13,6 +13,7 @@ stages:
 publish:
   stage: publish
   script:
+    - printenv
     - mvn deploy -DskipTests
 
 compile:
