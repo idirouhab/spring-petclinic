@@ -21,6 +21,8 @@ jobs:
           java-version: '17'
           cache: maven
           distribution: 'adopt'
+      - name: Check environment variables
+        run: printenv
       - name: Publish to Artifactory
         run: ./mvnw deploy -DskipTests -s ${{ env.MAVEN_SETTINGS_PATH }}
 
