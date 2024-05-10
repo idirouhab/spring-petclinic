@@ -1,5 +1,3 @@
-image: maven:3.8.5-openjdk-17
-
 variables:
   ARTIFACTORY_URL:  https://idirotest.jfrog.io
   ARTIFACTORY_REPO_RELEASE: spring-petclinic-libs-release
