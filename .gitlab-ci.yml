@@ -4,6 +4,8 @@ variables:
   ARTIFACTORY_URL:  https://idirotest.jfrog.io
   ARTIFACTORY_REPO_RELEASE: spring-petclinic-libs-release
   ARTIFACTORY_REPO_SNAPSHOT: spring-petclinic-libs-snapshot
+  JFROG_BUILD_STATUS: "PASS"
+
 stages:
   - build
 
