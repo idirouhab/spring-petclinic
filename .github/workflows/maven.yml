@@ -1,4 +1,4 @@
-name: Maven CI
+name: JFrog CLI CI
 
 on:
   push:
@@ -7,52 +7,8 @@ on:
   pull_request:
     branches:
       - main
-env:
-  MAVEN_SETTINGS_PATH: ".m2/settings.xml"
-  ARTIFACTORY_USER: ${{ vars.ARTIFACTORY_USER }}
-  ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
-
 
 jobs:
-  compile:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          cache: maven
-          distribution: 'adopt'
-      - name: Compile
-        run: ./mvnw compile
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          cache: maven
-          distribution: 'adopt'
-      - name: Test
-        run: ./mvnw test
-
-  package:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          cache: maven
-          distribution: 'adopt'
-      - name: Package
-        run: ./mvnw package
-
   publish:
     runs-on: ubuntu-latest
     steps:
@@ -63,7 +19,13 @@ jobs:
           java-version: '17'
           cache: maven
           distribution: 'adopt'
-      - name: Check environment variables
-        run: printenv | grep ARTIFACTORY
+      - name: Install JFrog CLI
+        run: |
+          curl -fL https://getcli.jfrog.io | sh
+          export PATH=$PATH:`pwd`
+      - name: Configure Artifactory
+        run: |
+          jfrog rt config --url ${{ secrets.ARTIFACTORY_URL }} --user ${{ secrets.ARTIFACTORY_USER }} --password ${{ secrets.ARTIFACTORY_PASSWORD }} --interactive=false
       - name: Publish to Artifactory
-        run: ./mvnw deploy -DskipTests -s ${{ env.MAVEN_SETTINGS_PATH }}
+        run: |
+          jfrog rt u "target/*.jar" ${{ secrets.ARTIFACTORY_REPO }}
