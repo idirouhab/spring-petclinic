@@ -24,5 +24,3 @@ jfrog-ci-integration:
     - jfrog rt bag
     - jfrog rt bp
     - jfrog rt bs
-  only:
-    - master
