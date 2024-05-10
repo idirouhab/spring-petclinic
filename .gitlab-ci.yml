@@ -23,11 +23,11 @@ jfrog-ci-integration:
   stage: build
   script:
     - !reference [ .setup_jfrog, script ]
-    - ./jfrog rt mvn-config --server-id-resolve=${ARTIFACTORY_URL} --repo-resolve-releases=${ARTIFACTORY_REPO_RELEASE} --repo-resolve-snapshots=${ARTIFACTORY_REPO_SNAPSHOT}
-    - ./jfrog rt mvn clean install --build-name=${BUILD_NAME} --build-number=${VERSION} || export JFROG_BUILD_STATUS="FAIL"
-    - ./jfrog rt bce ${BUILD_NAME} ${VERSION}
-    - ./jfrog rt bag ${BUILD_NAME} ${VERSION}
-    - ./jfrog rt bp ${BUILD_NAME} ${VERSION}
-#    - ./jfrog rt bs ${BUILD_NAME} ${VERSION}
+    - jfrog rt mvn-config --server-id-resolve=${ARTIFACTORY_URL} --repo-resolve-releases=${ARTIFACTORY_REPO_RELEASE} --repo-resolve-snapshots=${ARTIFACTORY_REPO_SNAPSHOT}
+    - jfrog rt mvn clean install --build-name=${BUILD_NAME} --build-number=${VERSION} || export JFROG_BUILD_STATUS="FAIL"
+    - jfrog rt bce ${BUILD_NAME} ${VERSION}
+    - jfrog rt bag ${BUILD_NAME} ${VERSION}
+    - jfrog rt bp ${BUILD_NAME} ${VERSION}
+#    - jfrog rt bs ${BUILD_NAME} ${VERSION}
   after_script:
     - !reference [.cleanup_jfrog, script]
