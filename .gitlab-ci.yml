@@ -8,27 +8,25 @@ variables:
   JF_USER: ${ARTIFACTORY_USER}
   JF_PASSWORD: ${ARTIFACTORY_PASSWORD}
   JFROG_BUILD_STATUS: "PASS"
-
-include:
-  - remote: "https://releases.jfrog.io/artifactory/jfrog-cli/gitlab/v2/.setup-jfrog-unix.yml"
+  DEFAULT_CLI_VERSION: "2.34.4"
+  JFROG_CLI_VERSION: ${JFROG_CLI_VERSION:=$DEFAULT_CLI_VERSION}
 
 stages:
   - build
 
 before_script:
-  - !reference [ .setup_jfrog, script ]
-  - export BUILD_NAME=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.artifactId}-${project.version}' --non-recursive exec:exec)
-  - export VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+  - curl -fL https://install-cli.jfrog.io | sh -s $JFROG_CLI_VERSION
+  - jf c add setup-jfrog-gitlab-ci-server-${CI_JOB_ID} --overwrite --url ${JF_URL} --user=${JF_USER} --password=${JF_PASSWORD}
+  - ls
+  - export BUILD_NAME=$(./mvnw -q -Dexec.executable=echo -Dexec.args='${project.artifactId}-${project.version}' --non-recursive exec:exec)
+  - export VERSION=$(./mvnw -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
   - jf mvn-config --server-id-resolve=${ARTIFACTORY_URL} --repo-resolve-releases=${ARTIFACTORY_REPO_RELEASE} --repo-resolve-snapshots=${ARTIFACTORY_REPO_SNAPSHOT}
 
 jfrog-ci-integration:
   stage: build
   script:
-    - !reference [ .setup_jfrog, script ]
     - jf mvn clean install --build-name=${BUILD_NAME} --build-number=${VERSION} || export JFROG_BUILD_STATUS="FAIL"
     - jf rt bce ${BUILD_NAME} ${VERSION}
     - jf rt bag ${BUILD_NAME} ${VERSION}
     - jf rt bp ${BUILD_NAME} ${VERSION}
 #    - jf bs ${BUILD_NAME} ${VERSION}
-  after_script:
-    - !reference [.cleanup_jfrog, script]
