@@ -1,4 +1,4 @@
-#image: maven:3.8.5-openjdk-17
+image: maven:3.8.5-openjdk-17
 
 variables:
   ARTIFACTORY_URL:  https://idirotest.jfrog.io
@@ -10,7 +10,7 @@ variables:
   JFROG_BUILD_STATUS: "PASS"
 
 include:
-  - remote: "https://releases.jfrog.io/artifactory/jfrog-cli/gitlab/v2/.setup-jfrog-unix.yml"
+  - remote: "https://releases.jfrog.io/artifactory/jfrog-cli/gitlab/.setup-jfrog.yml"
 
 stages:
   - build
@@ -22,17 +22,16 @@ before_script:
   - export BUILD_NAME=$(./mvnw -q -Dexec.executable=echo -Dexec.args='${project.artifactId}-${project.version}' --non-recursive exec:exec)
   - export VERSION=$(./mvnw -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
   - jf --version
-  - jf rt mvn-config --server-id-resolve=${ARTIFACTORY_URL} --repo-resolve-releases=${ARTIFACTORY_REPO_RELEASE} --repo-resolve-snapshots=${ARTIFACTORY_REPO_SNAPSHOT}
+  - jf mvn-config --server-id-resolve=${ARTIFACTORY_URL} --repo-resolve-releases=${ARTIFACTORY_REPO_RELEASE} --repo-resolve-snapshots=${ARTIFACTORY_REPO_SNAPSHOT}
 
 jfrog-ci-integration:
   stage: build
   script:
     - !reference [ .setup_jfrog, script ]
-    - jf rt mvn-config --server-id-resolve=${ARTIFACTORY_URL} --repo-resolve-releases=${ARTIFACTORY_REPO_RELEASE} --repo-resolve-snapshots=${ARTIFACTORY_REPO_SNAPSHOT}
-    - jf rt mvn clean install --build-name=${BUILD_NAME} --build-number=${VERSION} || export JFROG_BUILD_STATUS="FAIL"
-    - jf rt bce ${BUILD_NAME} ${VERSION}
-    - jf rt bag ${BUILD_NAME} ${VERSION}
-    - jf rt bp ${BUILD_NAME} ${VERSION}
-#    - jf rt bs ${BUILD_NAME} ${VERSION}
+    - jf mvn clean install --build-name=${BUILD_NAME} --build-number=${VERSION} || export JFROG_BUILD_STATUS="FAIL"
+    - jf bce ${BUILD_NAME} ${VERSION}
+    - jf bag ${BUILD_NAME} ${VERSION}
+    - jf bp ${BUILD_NAME} ${VERSION}
+#    - jf bs ${BUILD_NAME} ${VERSION}
   after_script:
     - !reference [.cleanup_jfrog, script]
