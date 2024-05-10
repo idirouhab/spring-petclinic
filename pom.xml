@@ -139,6 +139,12 @@
       <artifactId>jakarta.xml.bind-api</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>org.openrewrite.recipe</groupId>
+      <artifactId>rewrite-static-analysis</artifactId>
+      <version>1.6.0</version>
+    </dependency>
+
   </dependencies>
 
   <build>
