@@ -447,7 +447,7 @@
     <snapshotRepository>
       <id>snapshots</id>
       <name>a0p5vtrp0rmwp-artifactory-primary-0-snapshots</name>
-      <url>https://idirotest.jfrog.io/artifactory/spring-petsclinic-libs-snapshot-local</url>
+      <url>https://idirotest.jfrog.io/artifactory/spring-petsclinic-libs-release</url>
     </snapshotRepository>
   </distributionManagement>
 </project>

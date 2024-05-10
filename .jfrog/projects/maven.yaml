@@ -2,9 +2,9 @@ version: 1
 type: maven
 resolver:
     serverId: https://idiro.jfrog.io/
-    snapshotRepo: spring-petclinic-libs-snapshot
-    releaseRepo: spring-petclinic-libs-release
+    snapshotRepo: spring-petsclinic-libs-snapshot
+    releaseRepo: spring-petsclinic-libs-release
 deployer:
     serverId: https://idiro.jfrog.io/
-    snapshotRepo: spring-petclinic-libs-snapshot
-    releaseRepo: spring-petclinic-libs-release
+    snapshotRepo: spring-petsclinic-libs-snapshot
+    releaseRepo: spring-petsclinic-libs-release

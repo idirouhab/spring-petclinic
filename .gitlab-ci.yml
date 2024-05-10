@@ -2,8 +2,8 @@ image: maven:3.8.3-openjdk-17
 
 variables:
   ARTIFACTORY_URL:  https://idirotest.jfrog.io
-  ARTIFACTORY_REPO_RELEASE: spring-petclinic-libs-release
-  ARTIFACTORY_REPO_SNAPSHOT: spring-petclinic-libs-snapshot
+  ARTIFACTORY_REPO_RELEASE: spring-petsclinic-libs-release
+  ARTIFACTORY_REPO_SNAPSHOT: spring-petsclinic-libs-snapshot
   JF_URL: ${ARTIFACTORY_URL}
   JF_USER: ${ARTIFACTORY_USER}
   JF_PASSWORD: ${ARTIFACTORY_PASSWORD}
