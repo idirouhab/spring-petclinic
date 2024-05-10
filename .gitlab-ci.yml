@@ -17,8 +17,8 @@ stages:
 
 before_script:
   - !reference [ .setup_jfrog, script ]
-  - export BUILD_NAME=$(./mvnw -q -Dexec.executable=echo -Dexec.args='${project.artifactId}-${project.version}' --non-recursive exec:exec)
-  - export VERSION=$(./mvnw -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+  - export BUILD_NAME=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.artifactId}-${project.version}' --non-recursive exec:exec)
+  - export VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
   - jf mvn-config --server-id-resolve=${ARTIFACTORY_URL} --repo-resolve-releases=${ARTIFACTORY_REPO_RELEASE} --repo-resolve-snapshots=${ARTIFACTORY_REPO_SNAPSHOT}
 
 jfrog-ci-integration:
