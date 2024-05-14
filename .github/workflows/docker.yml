@@ -14,21 +14,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          cache: maven
-          distribution: 'adopt'
-
       - name: Build docker image
         run: docker build -t ${{ vars.ARTIFACTORY_DOCKER_REPO }}/spring-petsclinic:${{ github.ref_name }} .
 
 
       - name: Tag docker image
-        run: |
-          docker images
-          docker tag ${{ vars.ARTIFACTORY_DOCKER_REPO }}/spring-petsclinic:${{ github.ref_name }} idirotest.jfrog.io/${{ vars.ARTIFACTORY_DOCKER_REPO }}/spring-petclinic:${{ github.ref_name }}
+        run: docker tag ${{ vars.ARTIFACTORY_DOCKER_REPO }}/spring-petsclinic:${{ github.ref_name }} idirotest.jfrog.io/${{ vars.ARTIFACTORY_DOCKER_REPO }}/spring-petclinic:${{ github.ref_name }}
 
       - name: Build with Jfrog CLI
         uses: jfrog/setup-jfrog-cli@v4
@@ -42,5 +33,5 @@ jobs:
           jf --version
           jf rt bce
           jf rt bag
-          jf rt bp
           jf docker push idirotest.jfrog.io/${{ vars.ARTIFACTORY_DOCKER_REPO }}/spring-petclinic:${{ github.ref_name }}
+          jf rt bp
