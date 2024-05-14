@@ -21,6 +21,9 @@ jobs:
           cache: maven
           distribution: 'adopt'
 
+      - name: Build docker image
+        run: docker build -t ${{ github.repository }}:${{ github.ref_name }} .
+
       - name: Build with Jfrog CLI
         uses: jfrog/setup-jfrog-cli@v4
         env:
@@ -32,8 +35,8 @@ jobs:
       - name: Run Jfrog CLI
         run: |
           jf --version
-          jf rt ping
           jf rt bce
           jf rt bag
           jf rt bp
-
+          jf rt docker-login --url ${{ vars.ARTIFACTORY_URL }} --user ${{ vars.ARTIFACTORY_USER }} --password ${{ secrets.ARTIFACTORY_PASSWORD }}
+          jf rt docker-push ${{ github.repository }}:${{ github.ref_name }} ${{ var.ARTIFACTORY_DOCKER_REPO }}
