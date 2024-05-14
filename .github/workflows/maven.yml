@@ -37,7 +37,7 @@ jobs:
           export VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
           jf mvn-config --repo-deploy-releases=${ARTIFACTORY_REPO_RELEASE} --repo-deploy-snapshots=${ARTIFACTORY_REPO_RELEASE} --repo-resolve-releases=${ARTIFACTORY_REPO_RELEASE} --repo-resolve-snapshots=${ARTIFACTORY_REPO_SNAPSHOT}
           jf mvn clean package deploy --build-name=$BUILD_NAME --build-number=$VERSION || export JFROG_BUILD_STATUS="FAIL"
-          jf bce $BUILD_NAME $VERSION
-          jf bag $BUILD_NAME $VERSION
-          jf bp $BUILD_NAME $VERSION
+          jf rt bce $BUILD_NAME $VERSION
+          jf rt bag $BUILD_NAME $VERSION
+          jf rt bp $BUILD_NAME $VERSION
           jf bs $BUILD_NAME $VERSION  --fail=false

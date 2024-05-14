@@ -26,7 +26,7 @@ jfrog-ci-integration:
   stage: build
   script:
     - jf mvn clean install deploy --build-name=g${BUILD_NAME} --build-number=${VERSION} || export JFROG_BUILD_STATUS="FAIL"
-    - jf bce ${BUILD_NAME} ${VERSION}
-    - jf bag ${BUILD_NAME} ${VERSION}
-    - jf bp ${BUILD_NAME} ${VERSION}
+    - jf rt bce ${BUILD_NAME} ${VERSION}
+    - jf rt bag ${BUILD_NAME} ${VERSION}
+    - jf rt bp ${BUILD_NAME} ${VERSION}
     - jf bs ${BUILD_NAME} ${VERSION} --fail=false
