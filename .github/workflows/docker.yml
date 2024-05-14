@@ -26,7 +26,7 @@ jobs:
         env:
           JFROG_CLI_OFFER_CONFIG: false
           JF_URL: ${{ secrets.ARTIFACTORY_URL }}
-          JF_USER: ${{ secrets.ARTIFACTORY_URL }}
+          JF_USER: ${{ secrets.ARTIFACTORY_USER }}
           JF_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
 
       - name: Run Jfrog CLI
