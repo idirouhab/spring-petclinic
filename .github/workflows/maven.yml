@@ -28,6 +28,11 @@ jobs:
           JF_USER: ${{ vars.ARTIFACTORY_USER }}
           JF_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
 
-      - name: Publish to Artifactory
+      - name: Run JFrog CLI
         run: |
-          jf rt u "target/*.jar" ${{ vars.ARTIFACTORY_REPO }}
+          export BUILD_NAME=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.artifactId}-${project.version}' --non-recursive exec:exec)
+          export VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          jf rt mvn clean install --build-name=$BUILD_NAME --build-number=$VERSION || export JFROG_BUILD_STATUS="FAIL"
+          jf rt bce $BUILD_NAME $VERSION
+          jf rt bag $BUILD_NAME $VERSION
+          jf rt bp $BUILD_NAME $VERSION
