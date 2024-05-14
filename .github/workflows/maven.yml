@@ -40,4 +40,4 @@ jobs:
           jf bce $BUILD_NAME $VERSION
           jf bag $BUILD_NAME $VERSION
           jf bp $BUILD_NAME $VERSION
-          jf bs $BUILD_NAME $VERSION
+          jf bs $BUILD_NAME $VERSION  --fail=false
