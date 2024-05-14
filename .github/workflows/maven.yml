@@ -24,13 +24,13 @@ jobs:
         uses: jfrog/setup-jfrog-cli@v4
         env:
           JFROG_CLI_OFFER_CONFIG: false
-          JF_URL: ${{ secrets.ARTIFACTORY_URL }}
-          JF_USER: ${{ secrets.ARTIFACTORY_USER }}
+          JF_URL: ${{ environment.ARTIFACTORY_URL }}
+          JF_USER: ${{ environment.ARTIFACTORY_USER }}
           JF_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
 
       - name: Configure Artifactory
         run: |
-          jf rt config --url ${{ secrets.ARTIFACTORY_URL }} --user ${{ secrets.ARTIFACTORY_USER }} --password ${{ secrets.ARTIFACTORY_PASSWORD }} --interactive=false
+          jf rt config --url ${{ environment.ARTIFACTORY_URL }} --user ${{ environment.ARTIFACTORY_USER }} --password ${{ secrets.ARTIFACTORY_PASSWORD }} --interactive=false
       - name: Publish to Artifactory
         run: |
-          jf rt u "target/*.jar" ${{ secrets.ARTIFACTORY_REPO }}
+          jf rt u "target/*.jar" ${{ environment.ARTIFACTORY_REPO }}
