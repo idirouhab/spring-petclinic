@@ -27,7 +27,6 @@ jobs:
       - name: Build with Jfrog CLI
         uses: jfrog/setup-jfrog-cli@v4
         env:
-          JFROG_CLI_OFFER_CONFIG: false
           JF_URL: ${{ vars.ARTIFACTORY_URL }}
           JF_USER: ${{ vars.ARTIFACTORY_USER }}
           JF_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
@@ -39,4 +38,4 @@ jobs:
           jf rt bag
           jf rt bp
           jf rt docker-login --url ${{ vars.ARTIFACTORY_URL }} --user ${{ vars.ARTIFACTORY_USER }} --password ${{ secrets.ARTIFACTORY_PASSWORD }}
-          jf rt docker-push ${{ github.repository }}:${{ github.ref_name }} ${{ var.ARTIFACTORY_DOCKER_REPO }}
+          jf rt docker-push ${{ github.repository }}:${{ github.ref_name }} ${{ vars.ARTIFACTORY_DOCKER_REPO }}
