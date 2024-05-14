@@ -24,3 +24,16 @@ jobs:
       - name: Build with Jfrog CLI
         uses: jfrog/setup-jfrog-cli@v4
         run: jf --version
+        env:
+          JFROG_CLI_OFFER_CONFIG: false
+          JF_URL: ${{ secrets.ARTIFACTORY_URL }}
+          JF_USER: ${{ secrets.ARTIFACTORY_URL }}
+          JF_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+
+      - name: Run Jfrog CLI
+        run: |
+          jf rt ping
+          jf rt bce
+          jf rt bag
+          jf rt bp
+
