@@ -29,8 +29,8 @@ jobs:
 
       - name: Run Jfrog CLI
         run: |
-          jf --version
-          jf rt bce
-          jf rt bag
+          jf bce
+          jf bag
           jf docker push idirotest.jfrog.io/${{ vars.ARTIFACTORY_DOCKER_REPO }}/spring-petclinic:${{ github.ref_name }}
-          jf rt bp
+          jf bp
+          jf bs $BUILD_NAME $VERSION
