@@ -37,5 +37,4 @@ jobs:
           jf rt bce
           jf rt bag
           jf rt bp
-          jf rt docker-login --url ${{ vars.ARTIFACTORY_URL }} --user ${{ vars.ARTIFACTORY_USER }} --password ${{ secrets.ARTIFACTORY_PASSWORD }}
-          jf rt docker-push ${{ github.repository }}:${{ github.ref_name }} ${{ vars.ARTIFACTORY_DOCKER_REPO }}
+          jf rt dp ${{ github.repository }}:${{ github.ref_name }} ${{ vars.ARTIFACTORY_DOCKER_REPO }}
