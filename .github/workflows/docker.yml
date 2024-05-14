@@ -22,7 +22,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Build docker image
-        run: docker build -t ${{ vars.ARTIFACTORY_DOCKER_REPO }}/sping-petsclinic:${{ github.ref_name }} .
+        run: docker build -t ${{ vars.ARTIFACTORY_DOCKER_REPO }}/spring-petsclinic:${{ github.ref_name }} .
 
 
       - name: Tag docker image
