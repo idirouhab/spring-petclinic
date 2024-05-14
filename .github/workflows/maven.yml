@@ -28,9 +28,6 @@ jobs:
           JF_USER: ${{ vars.ARTIFACTORY_USER }}
           JF_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
 
-      - name: Configure Artifactory
-        run: |
-          jf rt config --url ${{ vars.ARTIFACTORY_URL }} --user ${{ vars.ARTIFACTORY_USER }} --password ${{ secrets.ARTIFACTORY_PASSWORD }} --interactive=false
       - name: Publish to Artifactory
         run: |
           jf rt u "target/*.jar" ${{ vars.ARTIFACTORY_REPO }}
