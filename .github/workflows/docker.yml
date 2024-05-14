@@ -32,5 +32,5 @@ jobs:
           jf bce
           jf bag
           jf docker push idirotest.jfrog.io/${{ vars.ARTIFACTORY_DOCKER_REPO }}/spring-petclinic:${{ github.ref_name }}
-          jf bp
-          jf bs $BUILD_NAME $VERSION
+          jf rt bp
+          jf bs
