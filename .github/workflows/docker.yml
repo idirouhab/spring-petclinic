@@ -22,7 +22,10 @@ jobs:
           distribution: 'adopt'
 
       - name: Build docker image
-        run: docker build -t idirotest.jfrog.io/${{ vars.ARTIFACTORY_DOCKER_REPO }}/sping-petsclinic:${{ github.ref_name }} .
+        run: docker build -t sping-petsclinic:${{ github.ref_name }} .
+
+      - name: Tag docker image
+        run: docker tag ${{ vars.ARTIFACTORY_DOCKER_REPO }}/spring-petsclinic:${{ github.ref_name }} idirotest.jfrog.io/${{ vars.ARTIFACTORY_DOCKER_REPO }}/spring-petclinic:${{ github.ref_name }}
 
       - name: Build with Jfrog CLI
         uses: jfrog/setup-jfrog-cli@v4
