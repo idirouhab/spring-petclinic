@@ -20,7 +20,7 @@ before_script:
   - jf c add setup-jfrog-gitlab-ci-server-${CI_JOB_ID} --overwrite --url ${JF_URL} --user=${JF_USER} --password=${JF_PASSWORD}
   - export BUILD_NAME=$(./mvnw -q -Dexec.executable=echo -Dexec.args='${project.artifactId}-${project.version}' --non-recursive exec:exec)
   - export VERSION=$(./mvnw -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
-  - jf mvn-config --server-id-resolve=${JF_URL} --repo-resolve-releases=${ARTIFACTORY_REPO_RELEASE} --repo-resolve-snapshots=${ARTIFACTORY_REPO_SNAPSHOT}
+  - jf mvn-config --server-id-resolve=${JF_URL} --repo-deploy-release=${ARTIFACTORY_REPO_RELEASE} --repo-deploy-snapshots=${ARTIFACTORY_REPO_RELEASE} --repo-resolve-snapshots=${ARTIFACTORY_REPO_RELEASE} --repo-resolve-snapshots=${ARTIFACTORY_REPO_SNAPSHOT}
 
 jfrog-ci-integration:
   stage: build
