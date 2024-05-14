@@ -29,5 +29,5 @@ jfrog-ci-integration:
     - jf rt bce ${BUILD_NAME} ${VERSION}
     - jf rt bag ${BUILD_NAME} ${VERSION}
     - jf rt bp ${BUILD_NAME} ${VERSION}
-#    - jf bs ${BUILD_NAME} ${VERSION}
+    - jf bs ${BUILD_NAME} ${VERSION}
 
