@@ -22,7 +22,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Build docker image
-        run: docker build -t ${{ github.repository }}:${{ github.ref_name }} .
+        run: docker build -t ${{ vars.ARTIFACTORY_URL }}/${{ vars.ARTIFACTORY_DOCKER_REPO }}/${{ github.repository }}:${{ github.ref_name }} .
 
       - name: Build with Jfrog CLI
         uses: jfrog/setup-jfrog-cli@v4
@@ -37,4 +37,4 @@ jobs:
           jf rt bce
           jf rt bag
           jf rt bp
-          jf rt dp ${{ github.repository }}:${{ github.ref_name }} ${{ vars.ARTIFACTORY_DOCKER_REPO }}
+          jf rt dp ${{ vars.ARTIFACTORY_URL }}/${{ vars.ARTIFACTORY_DOCKER_REPO }}/${{ github.repository }}:${{ github.ref_name }} my-docker-repo-in-artifactory
