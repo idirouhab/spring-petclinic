@@ -33,4 +33,4 @@ jobs:
           jf rt bag
           jf docker push idirotest.jfrog.io/${{ vars.ARTIFACTORY_DOCKER_REPO }}/spring-petclinic:${{ github.ref_name }}
           jf rt bp
-          jf bs --fail=false
+          jf bs --fail false
