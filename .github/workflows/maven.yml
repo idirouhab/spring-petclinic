@@ -19,13 +19,18 @@ jobs:
           java-version: '17'
           cache: maven
           distribution: 'adopt'
-      - name: Install JFrog CLI
-        run: |
-          curl -fL https://getcli.jfrog.io | sh
-          export PATH=$PATH:`pwd`
+
+      - name: Build with Jfrog CLI
+        uses: jfrog/setup-jfrog-cli@v4
+        env:
+          JFROG_CLI_OFFER_CONFIG: false
+          JF_URL: ${{ secrets.ARTIFACTORY_URL }}
+          JF_USER: ${{ secrets.ARTIFACTORY_URL }}
+          JF_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+
       - name: Configure Artifactory
         run: |
-          jfrog rt config --url ${{ secrets.ARTIFACTORY_URL }} --user ${{ secrets.ARTIFACTORY_USER }} --password ${{ secrets.ARTIFACTORY_PASSWORD }} --interactive=false
+          jf rt config --url ${{ secrets.ARTIFACTORY_URL }} --user ${{ secrets.ARTIFACTORY_USER }} --password ${{ secrets.ARTIFACTORY_PASSWORD }} --interactive=false
       - name: Publish to Artifactory
         run: |
-          jfrog rt u "target/*.jar" ${{ secrets.ARTIFACTORY_REPO }}
+          jf rt u "target/*.jar" ${{ secrets.ARTIFACTORY_REPO }}
