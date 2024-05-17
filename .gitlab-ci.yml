@@ -14,7 +14,7 @@ stages:
 
 before_script:
   - curl -fL https://install-cli.jfrog.io | sh -s $JFROG_CLI_VERSION
-  - jf c add setup-jfrog-gitlab-ci-server-${CI_JOB_ID} --overwrite --url ${JF_URL} --user=${JF_USER} --access_token=${JF_ACCESS_TOKEN}
+  - jf c add setup-jfrog-gitlab-ci-server-${CI_JOB_ID} --overwrite --url ${JF_URL} --user=${JF_USER} --access_token=${JF_TOKEN}
   - export BUILD_NAME=$(./mvnw -q -Dexec.executable=echo -Dexec.args='${project.artifactId}-${project.version}' --non-recursive exec:exec)
   - export VERSION=$(./mvnw -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
 
