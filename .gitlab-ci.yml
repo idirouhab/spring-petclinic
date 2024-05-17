@@ -4,9 +4,6 @@ variables:
   ARTIFACTORY_URL:  https://idirotest.jfrog.io
   ARTIFACTORY_REPO_RELEASE: spring-petsclinic-libs-release
   ARTIFACTORY_REPO_SNAPSHOT: spring-petsclinic-libs-snapshot
-  JF_URL: ${ARTIFACTORY_URL}
-  JF_USER: ${ARTIFACTORY_USER}
-  JF_PASSWORD: ${ARTIFACTORY_PASSWORD}
   JFROG_BUILD_STATUS: "PASS"
   DEFAULT_CLI_VERSION: "2.34.4"
   JFROG_CLI_VERSION: ${JFROG_CLI_VERSION:=$DEFAULT_CLI_VERSION}
@@ -17,7 +14,7 @@ stages:
 
 before_script:
   - curl -fL https://install-cli.jfrog.io | sh -s $JFROG_CLI_VERSION
-  - jf c add setup-jfrog-gitlab-ci-server-${CI_JOB_ID} --overwrite --url ${JF_URL} --user=${JF_USER} --password=${JF_PASSWORD}
+  - jf c add setup-jfrog-gitlab-ci-server-${CI_JOB_ID} --overwrite --url ${JF_URL} --user=${JF_USER} --access_token=${JF_ACCESS_TOKEN}
   - export BUILD_NAME=$(./mvnw -q -Dexec.executable=echo -Dexec.args='${project.artifactId}-${project.version}' --non-recursive exec:exec)
   - export VERSION=$(./mvnw -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
 
