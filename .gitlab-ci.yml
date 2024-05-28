@@ -27,7 +27,6 @@ before_script:
 
 jfrog-ci-integration:
   stage: build
-  extends: .jfrog_credentials
   script:
     - !reference [.jfrog_credentials, script]
     - jf mvn clean install deploy --build-name=g${BUILD_NAME} --build-number=${VERSION} || export JFROG_BUILD_STATUS="FAIL"
