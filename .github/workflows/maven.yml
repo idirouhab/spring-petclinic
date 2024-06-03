@@ -30,9 +30,7 @@ jobs:
           JF_URL: ${{ vars.JF_URL }}
 #          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
         with:
-          oidc-provider-name: github-jfrog
-          oidc-audience: my-aud
-
+          oidc-provider-name: jfrog-github
 
 
       - name: Run JFrog CLI
